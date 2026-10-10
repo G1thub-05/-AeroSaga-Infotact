@@ -10,8 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "cesium": "^1.146.0",
     "react": "^19.2.8",
-    "react-dom": "^19.2.8"
+    "react-dom": "^19.2.8",
+    "resium": "^1.27.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
