@@ -1,9 +1,15 @@
-import { useState } from 'react'
+import GlobeView from './components/GlobeView';
+import './App.css';
 
-function App() {
+export default function App() {
   return (
-    <div>AeroSaga Map</div>
-  )
+    <div className="app">
+      <header className="topbar">
+        <h2>AeroSaga - Fleet Control</h2>
+      </header>
+      <main className="map">
+        <GlobeView />
+      </main>
+    </div>
+  );
 }
-
-export default App

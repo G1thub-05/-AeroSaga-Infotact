@@ -10,10 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@deck.gl/layers": "^8.9.30",
+    "@deck.gl/react": "^8.9.30",
     "cesium": "^1.146.0",
+    "deck.gl": "^8.9.30",
+    "maplibre-gl": "^6.13.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
-    "resium": "^1.27.0"
+    "react-map-gl": "^8.1.3",
+    "resium": "^1.27.0",
+    "vite-plugin-cesium": "^1.2.23"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
