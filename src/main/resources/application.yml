@@ -1,5 +1,7 @@
 server:
-  port: ${PORT:8080}
+  port: 8081
 spring:
   application:
     name: aerosaga
+temporal:
+  target: localhost:7233

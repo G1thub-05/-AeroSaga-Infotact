@@ -1,0 +1,24 @@
+version: '3.5'
+services:
+  elasticsearch:
+    image: elasticsearch:7.16.2
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms256m -Xmx256m
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"
+  temporal:
+    image: temporalio/auto-setup:1.20.0
+    ports:
+      - "7233:7233"
+      - "8233:8233"
+    environment:
+      - DB=postgresql
+      - DB_PORT=5432
+      - USER=temporal
+      - PWD=temporal
+      - ES_SEEDS=elasticsearch
+      - ES_VERSION=v7
+    depends_on:
+      - elasticsearch

@@ -1,0 +1,6 @@
+<!-- File: backend/pom.xml (Dependencies ke andar add karein) -->
+<dependency>
+    <groupId>io.temporal</groupId>
+    <artifactId>temporal-sdk</artifactId>
+    <version>1.22.3</version>
+</dependency>
