@@ -25,4 +25,14 @@ import java.util.concurrent.CopyOnWriteArraySet;
 		}
 	}
 
-	
+	public List<Drone> all() {
+		return drones.values().stream().sorted(Comparator.comparing(Drone::id)).toList();
+	}
+
+	public Drone get(String id) {
+		Drone d = drones.get(id);
+		if(d == null)
+			throw new NoSuchElementException("Drone not found: " + id);
+		return d;
+	}
+}
