@@ -35,4 +35,14 @@ import java.util.concurrent.CopyOnWriteArraySet;
 			throw new NoSuchElementException("Drone not found: " + id);
 		return d;
 	}
+	
+	public synchronized void updateMission(String missionId, String droneId, String step, String status, double lat, double lon, String message) {
+		Drone old = get(droneId);
+		Drone next = new Drone(old.id(), old.name(), status, lat, lon, old.battery(), missionId, step, old.online(),
+				message);
+		drones.put(droneId, next);
+		broadcast(Map.of("type", "drone", "drone", next, "mission",
+				new MissionState(missionId, droneId, status, step, old.online(), lat, lon, message,
+						System.currentTimeMillis())));
+	}
 }
