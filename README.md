@@ -47,7 +47,7 @@ Local services  - Docker Compose                - Starts MongoDB and Temporal fo
         └── main.jsx                # React entry point
 ```
 
-### **✨ Features**
+## **✨ Features**
 
 - Drone mission workflow: <code>`Takeoff`</code> → <code>`Navigate`</code> → <code>`Drop Package`</code> → <code>`Return to Base`</code>.
 - View and search a simulated fleet of 50 mock drones starting around Raipur, Chhattisgarh.
@@ -94,7 +94,7 @@ If telemetry is lost during a mission, the workflow changes to <code>`PAUSED`</c
 ## **⚙️ Temporal Mode and Local Demo Mode**
 
 <p align="justify">
-AeroSaga supports two execution modes for managing and simulating drone missions: <code>`Temporal Mode`</code> and <code>`Local Demo Mode`</code>. Both modes follow the same basic mission sequence, including takeoff, navigation, package delivery, and return to base, but differ in how workflow execution and recovery are handled.
+AeroSaga supports two execution modes for managing and simulating drone missions: <code>`Temporal Mode`</code> and <code>`Local Demo Mode`</code>. Both modes follow the same basic mission sequence, including takeoff, navigation, package delivery, and return to base, but differ in how workflow execution and recovery are handled. MongoDB is used in both run modes. Temporal mode runs durable workflows; local demo mode runs the mission simulator inside the backend. Choose a mode before starting the backend. MongoDB is used in both modes.
 </p>
 
 <p align="justify">
@@ -108,3 +108,22 @@ AeroSaga supports two execution modes for managing and simulating drone missions
 <p align="justify">
 <code><b><i>Simulation Telemetry and Data Persistence:</i></b></code> AeroSaga simulates drone movement and streams position updates to the dashboard as telemetry. These updates represent simulated flight activity and do not control physical drones. MongoDB stores the latest state of each drone and mission rather than maintaining a separate historical record for every route waypoint.
 </p>
+
+### **⚙️ How the services fit together**
+
+```text
+┌────────────────────────────────────────────────────┐
+│              React + Cesium dashboard              │
+│ Fleet · mission controls · Map · route · telemetry │
+└─────────────────────────┬──────────────────────────┘
+                 REST + WebSocket
+                          ▼
+┌────────────────────────────────────────────────────┐
+│ Spring Boot backend -- API · fleet · mission logic │
+└───────────┬──────────────────────────┬─────────────┘
+            │                          │
+            ▼                          ▼
+   ┌──────────────────┐      ┌────────────────────┐
+   │ MongoDB App data │      │ Temporal Workflows │
+   └──────────────────┘      └────────────────────┘
+```
