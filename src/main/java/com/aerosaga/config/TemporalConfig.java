@@ -1,41 +1,48 @@
 package com.aerosaga.config;
 
-import com.aerosaga.activity.DroneActivities;
+import com.aerosaga.activity.DroneActivitiesImpl;
 import com.aerosaga.workflow.DroneMissionWorkflowImpl;
+import com.aerosaga.workflow.FleetMissionWorkflowImpl;
 import io.temporal.client.WorkflowClient;
 import io.temporal.serviceclient.WorkflowServiceStubs;
-import io.temporal.serviceclient.WorkflowServiceStubsOptions;
 import io.temporal.worker.Worker;
 import io.temporal.worker.WorkerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class TemporalConfig {
 
-    public static final String TASK_QUEUE = "DRONE_TASK_QUEUE";
+    private final DroneActivitiesImpl droneActivities;
 
-    @Value("${temporal.target:localhost:7233}")
-    private String target;
+    public TemporalConfig(DroneActivitiesImpl droneActivities) {
+        this.droneActivities = droneActivities;
+    }
 
     @Bean
     public WorkflowServiceStubs workflowServiceStubs() {
-        return WorkflowServiceStubs.newServiceStubs(
-                WorkflowServiceStubsOptions.newBuilder().setTarget(target).build());
+        return WorkflowServiceStubs.newLocalServiceStubs();
     }
 
     @Bean
-    public WorkflowClient workflowClient(WorkflowServiceStubs stubs) {
-        return WorkflowClient.newInstance(stubs);
+    public WorkflowClient workflowClient(WorkflowServiceStubs workflowServiceStubs) {
+        return WorkflowClient.newInstance(workflowServiceStubs);
     }
 
-    @Bean(destroyMethod = "shutdown")
-    public WorkerFactory workerFactory(WorkflowClient client, DroneActivities activities) {
-        WorkerFactory factory = WorkerFactory.newInstance(client);
-        Worker worker = factory.newWorker(TASK_QUEUE);
-        worker.registerWorkflowImplementationTypes(DroneMissionWorkflowImpl.class);
-        worker.registerActivitiesImplementations(activities);
+    @Bean
+    public WorkerFactory workerFactory(WorkflowClient workflowClient) {
+        WorkerFactory factory = WorkerFactory.newInstance(workflowClient);
+        Worker worker = factory.newWorker("DRONE_TASK_QUEUE");
+
+        // DONO workflows ko register kar rahe hain
+        worker.registerWorkflowImplementationTypes(
+                DroneMissionWorkflowImpl.class,
+                FleetMissionWorkflowImpl.class
+        );
+
+        // Activities register kar rahe hain
+        worker.registerActivitiesImplementations(droneActivities);
+
         factory.start();
         return factory;
     }
