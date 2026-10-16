@@ -121,7 +121,6 @@ AeroSaga supports two execution modes for managing and simulating drone missions
 ┌────────────────────────────────────────────────────┐
 │ Spring Boot backend -- API · fleet · mission logic │
 └───────────┬──────────────────────────┬─────────────┘
-            │                          │
             ▼                          ▼
    ┌──────────────────┐      ┌────────────────────┐
    │ MongoDB App data │      │ Temporal Workflows │
