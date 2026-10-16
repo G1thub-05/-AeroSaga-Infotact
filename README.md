@@ -1,6 +1,10 @@
 ## **🚁 Project overview: AeroSaga — Drone Mission Control**
 
-<p align="justify">AeroSaga is a full-stack demonstration of a drone fleet control system. Operators can select a simulated drone, plan a delivery, follow its route on a 3D map, and monitor mission progress in real time. The project brings together a **React** dashboard, a **Spring Boot** API, **MongoDB** persistence, **Temporal** workflows, and **CesiumJS** maps. It is designed for local development and demonstration. AeroSaga does not connect to or control physical drones. Drone locations, battery readings, and flight activity are simulated. The drones, GPS readings, and flight activities are simulated. The Java SDK is a Maven dependency; Maven downloads it automatically on the first backend run. </p>
+<p align="justify">
+
+AeroSaga is a full-stack demonstration of a drone fleet control system. Operators can select a simulated drone, plan a delivery, follow its route on a 3D map, and monitor mission progress in real time. The project brings together a `React` dashboard, a `Spring Boot API`, `MongoDB` persistence, `Temporal` workflows, and `CesiumJS` maps. It is designed for local development and demonstration. AeroSaga does not connect to or control physical drones. Drone locations, battery readings, and flight activity are simulated. The drones, GPS readings, and flight activities are simulated. The Java SDK is a Maven dependency; Maven downloads it automatically on the first backend run.
+
+</p>
 
 ## **🧰 Technologies used**
 
@@ -84,4 +88,22 @@ A configured demo failure follows the safe-return path instead. After delivery o
 - Step 4. Return to base
 ```
 
-<p align="justify">If telemetry is lost during a mission, the workflow changes to `PAUSED` and waits for the drone to reconnect. When telemetry returns, the workflow resumes from its saved progress. An emergency abort stops the outbound mission and starts a safe return; the drone is available again only after reaching base. If package delivery fails, the simulator runs its compensation behavior and returns the drone safely.</p>
+<p align="justify">
+
+If telemetry is lost during a mission, the workflow changes to `PAUSED` and waits for the drone to reconnect. When telemetry returns, the workflow resumes from its saved progress. An emergency abort stops the outbound mission and starts a safe return; the drone is available again only after reaching base. If package delivery fails, the simulator runs its compensation behavior and returns the drone safely.
+
+</p>
+
+## **⚙️ Temporal Mode and Local Demo Mode**
+
+<p align="justify">
+
+AeroSaga supports two execution modes for managing and simulating drone missions: `Temporal Mode` and `Local Demo Mode`. Both modes follow the same basic mission sequence, including takeoff, navigation, package delivery, and return to base, but differ in how workflow execution and recovery are handled.
+
+***Local Demo Mode:*** In this mode, Temporal manages the mission workflow and tracks its progress durably. If the backend experiences an interruption, Temporal can recover and continue workflow execution based on its persisted history. MongoDB stores the latest state of each drone and mission, while Temporal manages workflow execution and recovery.
+
+***Local Demo Mode:*** This mode executes the mission sequence directly in the backend without using Temporal. It is useful for local development, testing, and demonstrations because it requires a simpler setup. MongoDB continues to persist the latest drone and mission state; however, an in-progress simulation does not automatically resume after a backend restart.
+
+***Simulation Telemetry and Data Persistence:*** AeroSaga simulates drone movement and streams position updates to the dashboard as telemetry. These updates represent simulated flight activity and do not control physical drones. MongoDB stores the latest state of each drone and mission rather than maintaining a separate historical record for every route waypoint.
+
+</p>
