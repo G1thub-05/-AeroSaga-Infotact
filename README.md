@@ -67,3 +67,21 @@ Local services  - Docker Compose                - Starts MongoDB and Temporal fo
 6. Optional: a Cesium ion token for 3D ground elevation. Map imagery styles work without it.
 7. IntelliJ IDEA is optional; its built-in Terminal can run all commands below.
 ```
+
+## **⚙️ ️Mission flow theory**
+
+<p align="justify">
+A mission is a controlled sequence where an operator selects an available online drone that is not already active, specifies a destination by place name or coordinates, and starts a mission, if no custom source is entered, the drone's current location is used. The backend checks the coordinates, creates a mission record, and starts either a Temporal workflow or the local simulator, which handles takeoff, navigation, package delivery, and return to base. The simulated drone moves along the outbound route. Its status and coordinates are updated as it moves; the outbound route and drone marker use mint/green. At the destination, the simulator completes the package-drop activity.
+
+A configured demo failure follows the safe-return path instead. After delivery or after an abort or failed delivery—the drone follows the amber return route to its starting point. It remains unavailable for another mission while its status is `RETURNING`. At base, the mission becomes `COMPLETED`, `ABORTED`, or `FAILED_SAFE`. Once the drone is no longer active and is online, it can be selected for another mission.
+
+</p>
+
+```text
+- Step 1. Select an available droneSet and confirm source and destination
+- Step 2. Validate coordinates and create mission
+- Step 3. Take off → Fly outbound → Drop package
+- Step 4. Return to base
+```
+
+<p align="justify">If telemetry is lost during a mission, the workflow changes to `PAUSED` and waits for the drone to reconnect. When telemetry returns, the workflow resumes from its saved progress. An emergency abort stops the outbound mission and starts a safe return; the drone is available again only after reaching base. If package delivery fails, the simulator runs its compensation behavior and returns the drone safely.</p>
