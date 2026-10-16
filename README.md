@@ -52,12 +52,13 @@ Local services  - Docker Compose                - Starts MongoDB and Temporal fo
 - Select a drone and inspect its status, battery, connectivity, and current location.
 - Dispatch a delivery mission using a place search or latitude/longitude coordinates.
 - Follow outbound, return routes and switch between **Satellite**, **Terrain**, and **Street** 3D globe styles.
-- Demonstrate signal loss, recovery, emergency abort, and compensating return-to-base flow when package drop fails.
-- Run missions through Temporal workflows or use the simpler local demo mode if you do not want to start a Temporal server.
+- Demonstrate signal loss, recovery, emergency abort, compensating return-to-base flow when package drop fails.
+- Run missions through Temporal or use local demo mode if you do not want to start a Temporal server.
 - Watch live fleet and mission updates arrive through WebSockets, plus mission APIs.
 - Save drone state and each mission's latest state in MongoDB.
 
 ## **⚙️ Prerequisites Setup**
+
 ```bash
 1. Java JDK 21 — verify with `java -version`.
 2. Maven 3.9 or newer — verify with `mvn -version`. Maven output should show Java 21.
