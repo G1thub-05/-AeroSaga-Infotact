@@ -1,62 +1,75 @@
 package com.aerosaga.workflow;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.withSettings;
-import static org.mockito.Mockito.when;
-
 import com.aerosaga.activity.DroneActivities;
-import com.aerosaga.config.TemporalConfig;
 import com.aerosaga.model.MissionRequest;
 import com.aerosaga.model.MissionStatus;
-import com.aerosaga.workflow.DroneMissionWorkflow;
-
-import io.temporal.client.WorkflowClient;
 import io.temporal.client.WorkflowOptions;
 import io.temporal.testing.TestWorkflowEnvironment;
 import io.temporal.worker.Worker;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class DroneMissionWorkflowTest {
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
 
-    private TestWorkflowEnvironment env;
+public class DroneMissionWorkflowTest {
+
+    private TestWorkflowEnvironment testEnv;
     private Worker worker;
-    private WorkflowClient client;
+    private DroneMissionWorkflow workflow;
+    private DroneActivities activities;
 
     @BeforeEach
-    void setUp() {
-        env = TestWorkflowEnvironment.newInstance();
-        worker = env.newWorker(TemporalConfig.TASK_QUEUE);
+    public void setUp() {
+        testEnv = TestWorkflowEnvironment.newInstance();
+        worker = testEnv.newWorker("DRONE_TASK_QUEUE");
         worker.registerWorkflowImplementationTypes(DroneMissionWorkflowImpl.class);
-        client = env.getWorkflowClient();
+
+        // Mockito fix: withoutAnnotations() zaroori hai Temporal activities ke liye
+        activities = mock(DroneActivities.class, withSettings().withoutAnnotations());
+        
+        // Mock behaviors
+        when(activities.takeoff(anyString(), anyDouble(), anyDouble(), anyInt())).thenReturn("TAKEOFF_OK");
+        when(activities.dropPackage(anyString(), anyBoolean())).thenReturn("DROP_OK");
+        when(activities.land(anyString())).thenReturn("LAND_OK");
+        // reportPosition void hai isliye usko mock return ki zaroorat nahi
+
+        worker.registerActivitiesImplementations(activities);
+        testEnv.start();
+
+        workflow = testEnv.getWorkflowClient().newWorkflowStub(
+                DroneMissionWorkflow.class,
+                WorkflowOptions.newBuilder()
+                        .setTaskQueue("DRONE_TASK_QUEUE")
+                        .build()
+        );
     }
 
     @AfterEach
-    void tearDown() {
-        env.close();
+    public void tearDown() {
+        testEnv.close();
     }
 
     @Test
-    void takeoffMissionCompletes() {
-        DroneActivities activities =
-                mock(DroneActivities.class, withSettings().withoutAnnotations());
-        when(activities.takeoff("test-drone")).thenReturn("TAKEOFF_OK");
-        worker.registerActivitiesImplementations(activities);
-        env.start();
+    public void testSuccessfulMission() {
+        MissionRequest request = new MissionRequest();
+        request.setDroneId("alpha");
 
-        DroneMissionWorkflow workflow = client.newWorkflowStub(
-                DroneMissionWorkflow.class,
-                WorkflowOptions.newBuilder().setTaskQueue(TemporalConfig.TASK_QUEUE).build());
-        MissionRequest req = new MissionRequest();
-        req.droneId = "test-drone";
+        // Mission run karo
+        MissionStatus status = workflow.runMission(request);
 
-        MissionStatus result = workflow.runMission(req);
+        // Verify state
+        assertEquals("COMPLETED", status.getState());
+        assertEquals("alpha", status.getDroneId());
 
-        assertEquals("COMPLETED", result.state);
-        verify(activities).takeoff("test-drone");
+        // Verify activities sahi se call hui hain
+        verify(activities).takeoff(eq("alpha"), anyDouble(), anyDouble(), anyInt());
+        verify(activities).dropPackage("alpha", false);
+        verify(activities).land("alpha");
+        
+        // 20 times call hoga kyunki 10 steps jaane ke aur 10 aane ke
+        verify(activities, times(20)).reportPosition(eq("alpha"), anyDouble(), anyDouble(), anyInt(), anyString());
     }
 }
