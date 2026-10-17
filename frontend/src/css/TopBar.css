@@ -1,0 +1,96 @@
+.topbar {
+	position: relative;
+	height: 68px;
+	border-bottom: 1px solid #1b2c3a;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 25px;
+	background: #09141fea;
+}
+.topbar--notice .top-status {
+	visibility: hidden;
+}
+.brand {
+	display: flex;
+	gap: 11px;
+	align-items: center;
+	text-decoration: none;
+	color: #f3f7fb;
+	font-family: "Space Grotesk";
+	font-weight: 700;
+	font-size: 15px;
+	letter-spacing: 0.08em;
+}
+.brand small,
+.operator small {
+	display: block;
+	color: #7790a1;
+	font: 9px "DM Mono";
+	letter-spacing: 0.13em;
+	margin-top: 2px;
+}
+.brand-mark {
+	width: 33px;
+	height: 33px;
+	border: 1px solid #23675e;
+	background: #102722;
+	color: #4cddbf;
+	border-radius: 9px;
+	display: grid;
+	place-items: center;
+}
+.top-status {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+	color: #9cb0bf;
+	font: 10px "DM Mono";
+	letter-spacing: 0.08em;
+}
+.top-status > i {
+	height: 15px;
+	border-left: 1px solid #243541;
+	margin: 0 7px;
+}
+.live-dot,
+.cluster > span,
+.map-live i {
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: #32d5ad;
+	box-shadow: 0 0 11px #32d5ad80;
+}
+.live-dot.offline {
+	background: #f4a742;
+	box-shadow: 0 0 11px #f4a74280;
+}
+.cluster {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+.cluster b {
+	color: #48d6b3;
+	font-weight: 500;
+}
+.operator {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+	color: #dce6ee;
+	font: 10px "DM Mono";
+	letter-spacing: 0.08em;
+}
+.avatar {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background: #1b3040;
+	border: 1px solid #395569;
+	display: grid;
+	place-items: center;
+	color: #a5c5dc;
+	font: 10px "DM Mono";
+}
