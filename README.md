@@ -94,7 +94,7 @@ If telemetry is lost during a mission, the workflow changes to <code>`PAUSED`</c
 ## **⚙️ Temporal Mode and Local Demo Mode**
 
 <p align="justify">
-AeroSaga supports two execution modes for managing and simulating drone missions: <code>`Temporal Mode`</code> and <code>`Local Demo Mode`</code>. Both modes follow the same basic mission sequence, including takeoff, navigation, package delivery, and return to base, but differ in how workflow execution and recovery are handled. MongoDB is used in both run modes. Temporal mode runs durable workflows; local demo mode runs the mission simulator inside the backend. Choose a mode before starting the backend. MongoDB is used in both modes.
+AeroSaga supports two execution modes for managing and simulating drone missions: <code>`Temporal Mode`</code> and <code>`Local Demo Mode`</code>. Both modes follow the same basic mission sequence, including takeoff, navigation, package delivery, and return to base, but differ in how workflow execution and recovery are handled. MongoDB is used in both run modes. Temporal mode runs durable workflows; local demo mode runs the mission simulator inside the backend. Choose a mode before starting the backend.
 </p>
 
 <p align="justify">
