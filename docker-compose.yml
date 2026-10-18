@@ -11,13 +11,12 @@ services:
       - "7233:7233"
     environment:
       - CASSANDRA_SEEDS=cassandra
-      - DYNAMIC_CONFIG_FILE_PATH=config/dynamicconfig/development-sql.yaml
     depends_on:
       - cassandra
   temporal-ui:
     image: temporalio/ui:2.21.3
     ports:
-      - "8080:8080"
+      - "8088:8080"
     environment:
       - TEMPORAL_ADDRESS=temporal:7233
       - TEMPORAL_CORS_ORIGINS=http://localhost:3000

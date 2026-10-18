@@ -28,14 +28,16 @@ public class TelemetryBroadcaster {
 
     public void broadcast(TelemetryMessage message) {
         latestPositions.put(message.getDroneId(), message);
-        String payload;
         try {
-            payload = objectMapper.writeValueAsString(message);
+            String payload = objectMapper.writeValueAsString(message);
             TextMessage textMessage = new TextMessage(payload);
             sessions.values().forEach(session -> {
                 if (session.isOpen()) {
                     try {
-                        session.sendMessage(textMessage);
+                        // Yeh block traffic jam ko rokega
+                        synchronized (session) {
+                            session.sendMessage(textMessage);
+                        }
                     } catch (IOException ignored) {}
                 }
             });
@@ -47,7 +49,11 @@ public class TelemetryBroadcaster {
     private void sendToSession(WebSocketSession session, TelemetryMessage message) {
         if (session.isOpen()) {
             try {
-                session.sendMessage(new TextMessage(objectMapper.writeValueAsString(message)));
+                String payload = objectMapper.writeValueAsString(message);
+                // Yahan bhi safety ke liye synchronized laga diya
+                synchronized (session) {
+                    session.sendMessage(new TextMessage(payload));
+                }
             } catch (IOException ignored) {}
         }
     }
