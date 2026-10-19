@@ -1,0 +1,4 @@
+/* Metric visuals are scoped in the shared dashboard theme; this file owns metric-specific additions. */
+.metric strong {
+	display: block;
+}

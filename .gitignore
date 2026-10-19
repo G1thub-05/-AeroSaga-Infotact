@@ -1,5 +1,12 @@
+**/target/
+.m2repo/
 node_modules/
-frontend/node_modules/
-target/
-backend/target/
-.env
+dist/
+.idea/
+*.log
+
+# Ignore real environment files everywhere; keep checked-in templates.
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.*.example

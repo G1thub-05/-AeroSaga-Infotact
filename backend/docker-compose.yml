@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 version: '3.5'
 services:
   elasticsearch:
@@ -22,3 +23,37 @@ services:
       - ES_VERSION=v7
     depends_on:
       - elasticsearch
+=======
+services:
+  mongodb:
+    image: mongo:8
+    environment:
+      MONGO_INITDB_DATABASE: aerosaga
+    ports:
+      - "${MONGO_BIND_ADDRESS:-127.0.0.1}:${MONGO_PORT:-27017}:27017"
+    volumes:
+      - mongodb-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+  temporal:
+    image: temporalio/temporal:latest
+    # Local development only: the named volume may be root-owned on first creation.
+    user: "0:0"
+    command: server start-dev --ip 0.0.0.0 --db-filename /var/lib/temporal/temporal.db
+    ports:
+      - "${TEMPORAL_BIND_ADDRESS:-127.0.0.1}:${TEMPORAL_GRPC_PORT:-7233}:7233"
+      - "${TEMPORAL_BIND_ADDRESS:-127.0.0.1}:${TEMPORAL_UI_PORT:-18233}:8233"
+    volumes:
+      - temporal-data:/var/lib/temporal
+    healthcheck:
+      test: ["CMD", "temporal", "operator", "namespace", "list"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+volumes:
+  mongodb-data:
+  temporal-data:
+>>>>>>> 197fa71afecaa05a3715125f97f624f9746a9806
