@@ -1,0 +1,23 @@
+.drone-navigator {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	flex: 0 0 auto;
+	gap: 5px;
+	margin-left: 8px;
+}
+.drone-navigator .icon-button {
+	width: 32px;
+	height: 32px;
+	flex: 0 0 32px;
+	border-radius: 7px;
+}
+.drone-navigator .icon-button:not(:disabled) {
+	border-color: #315044;
+	background: #10251f;
+	color: #59d8b8;
+}
+.drone-navigator .icon-button:not(:disabled):hover {
+	background: #17372e;
+	border-color: #49d4b1;
+}
