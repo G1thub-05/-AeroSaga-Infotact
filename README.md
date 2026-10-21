@@ -126,3 +126,9 @@ AeroSaga supports two execution modes for managing and simulating drone missions
    │ MongoDB App data │      │ Temporal Workflows │
    └──────────────────┘      └────────────────────┘
 ```
+| Mode               | Set `TEMPORAL_ENABLED` to | Start                                   | Why Choose it                                                                  |
+| :----------------- | :------------------------ | :-------------------------------------- | :----------------------------------------------------------------------------- |
+| Full workflow mode | `true`                    | MongoDB + Temporal + backend + frontend | For durable pause/resume, and Temporal's workflow execution history.           |
+| Local demo mode    | `false`                   | MongoDB + backend + frontend            | To try the UI and mission simulation with fewer services and without Temporal. |
+
+> <p align="justify"> <b>Why use Temporal?</b> Temporal keeps track of workflow progress and can resume workflows after backend interruptions. This mode is best for demonstrating durable mission orchestration. Without temporal the local simulator is quicker to start and useful for a basic UI/API demo. Its active mission progress is held in memory, so it will not resume if the backend stops. MongoDB still saves the drone and latest mission state. The first run needs an internet connection so Docker, Maven, and npm can download the project dependencies and service images. If using IntelliJ IDEA, open `backend/pom.xml` as a Maven project and set the Project SDK to Java 21.</p>
