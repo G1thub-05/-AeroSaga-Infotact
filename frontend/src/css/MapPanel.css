@@ -1,0 +1,159 @@
+.map-section {
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	padding-top: 14px;
+}
+.map-top {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 3px 4px 12px;
+}
+.map-title h2 {
+	font-size: 18px;
+}
+.map-live {
+	vertical-align: middle;
+	color: #44d6b2;
+	background: #102923;
+	border: 1px solid #224a40;
+	border-radius: 3px;
+	padding: 3px 6px;
+	font: 8px "DM Mono";
+	letter-spacing: 0.1em;
+	margin-left: 8px;
+}
+.map-live i {
+	display: inline-block;
+	width: 5px;
+	height: 5px;
+	margin-right: 4px;
+}
+.map-tools {
+	display: flex;
+	align-items: center;
+	gap: 13px;
+	color: #9aabb6;
+	font: 8px "DM Mono";
+}
+.map-tools > span {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+.map-tool {
+	border: 1px solid #293b49;
+	border-radius: 4px;
+	background: #10202d;
+	color: #9db0bd;
+	width: 28px;
+	height: 27px;
+	display: grid;
+	place-items: center;
+	cursor: pointer;
+}
+.map-frame {
+	position: relative;
+	flex: 1;
+	min-height: 420px;
+	border: 1px solid #223744;
+	border-radius: 7px;
+	overflow: hidden;
+	background: #0a1721;
+}
+.globe {
+	position: absolute;
+	inset: 0;
+}
+.cesium-viewer,
+.cesium-widget,
+.cesium-widget canvas {
+	width: 100%;
+	height: 100%;
+}
+.cesium-viewer-bottom {
+	display: none;
+}
+.map-coordinates {
+	position: absolute;
+	bottom: 12px;
+	left: 13px;
+	right: 13px;
+	display: flex;
+	justify-content: space-between;
+	color: #9cb0bf;
+	font: 8px "DM Mono";
+	letter-spacing: 0.06em;
+	pointer-events: none;
+}
+.map-coordinates span:first-child {
+	display: flex;
+	align-items: center;
+}
+.map-scale {
+	position: absolute;
+	right: 15px;
+	bottom: 34px;
+	color: #b1c0c9;
+	font: 8px "DM Mono";
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+.map-scale span {
+	width: 43px;
+	border-top: 1px solid #c0ced7;
+}
+.selected-card {
+	position: absolute;
+	top: 13px;
+	left: 13px;
+	border: 1px solid #314858;
+	background: #0a1723ef;
+	border-radius: 6px;
+	padding: 8px 9px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	min-width: 150px;
+}
+.selected-card .drone-symbol {
+	width: 29px;
+	height: 29px;
+}
+.selected-card > div:nth-child(2) {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+.selected-card strong {
+	font: 11px "Space Grotesk";
+}
+.selected-card span {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	color: #9aacb7;
+	font: 8px "DM Mono";
+}
+.selected-card button {
+	margin-left: auto;
+	border: 0;
+	background: none;
+	color: #889da9;
+	cursor: pointer;
+}
+.map-bottom {
+	display: flex;
+	justify-content: space-between;
+	padding: 9px 4px;
+	color: #7790a1;
+	font: 8px "DM Mono";
+	letter-spacing: 0.06em;
+}
+.map-bottom span {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
