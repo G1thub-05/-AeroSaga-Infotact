@@ -1,0 +1,78 @@
+.metrics {
+	padding: 16px 24px;
+	display: grid;
+	grid-template-columns: repeat(4, minmax(130px, 1fr)) 1.35fr;
+	gap: 10px;
+	border-bottom: 1px solid #1b2c3a;
+}
+.metric {
+	min-height: 67px;
+	border: 1px solid #1b2c3a;
+	border-radius: 7px;
+	background: #0d1a26bd;
+	display: flex;
+	align-items: center;
+	padding: 11px 14px;
+	gap: 12px;
+}
+.metric-icon {
+	width: 34px;
+	height: 34px;
+	display: grid;
+	place-items: center;
+	border-radius: 6px;
+	background: #172430;
+	color: #90a6b5;
+}
+.metric-icon svg {
+	width: 17px;
+}
+.metric-icon.mint {
+	color: #3bd5b1;
+	background: #112b2a;
+}
+.metric-icon.blue {
+	color: #89aaff;
+	background: #192743;
+}
+.metric-icon.amber {
+	color: #f5b554;
+	background: #302717;
+}
+.metric > div:last-child {
+	min-width: 0;
+}
+.metric-label,
+.metric small {
+	display: block;
+	color: #778d9f;
+	font: 9px "DM Mono";
+	letter-spacing: 0.09em;
+}
+.metric strong {
+	display: block;
+	color: #edf4f8;
+	font: 600 17px "Space Grotesk";
+	margin-top: 3px;
+}
+.metric small {
+	display: block;
+	margin-top: 1px;
+	font-size: 8px;
+}
+.weather {
+	gap: 10px;
+}
+.weather strong {
+	font-size: 12px;
+	color: #f5c26e;
+}
+.weather-pill {
+	margin-left: auto;
+	border: 1px solid #554323;
+	color: #dcb468;
+	border-radius: 3px;
+	padding: 4px 6px;
+	font: 8px "DM Mono";
+	white-space: nowrap;
+}
