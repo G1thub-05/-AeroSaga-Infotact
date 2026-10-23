@@ -233,7 +233,7 @@ docker compose ps                         # Shows the status of MongoDB containe
 3. Under **File → Project Structure → Project**, set the Project SDK to Java 21.
 4. By default, the backend connects to MongoDB and Temporal. Keep this terminal open.
 5. Open a PowerShell terminal in the `backend` folder and run: `mvn spring-boot:run`
-6. Before starting backend, ensure Docker is running and both MongoDB and Temporal containers are up and healthy.
+6. Before starting backend, ensure Docker is running and both MongoDB and Temporal are up and healthy.
 
 ## **Step 5 — Start the frontend**
 
@@ -286,7 +286,7 @@ docker compose ps                         # Shows the status of MongoDB containe
 
 <p align="justify">Check that exactly one MongoDB server is running on port `27017`. For Docker, check <code>docker compose ps</code> and start it with <code>docker compose up -d mongodb</code>. For a Windows installation, open Services and start the MongoDB Server service. Keep <code>MONGODB_URI</code> pointed at the host and port where MongoDB is listening, then restart the backend.
 
-If the log contains <code>UNAVAILABLE</code>, <code>Connection refused</code>, or <code>localhost:7233</code>, the backend is configured for Temporal mode but the Temporal server is not running. From the <code>backend</code> folder, run <code>docker compose up -d temporal</code> or <code>docker compose up -d mongodb temporal</code> for the full setup, then wait until <code>docker compose ps</code> shows Temporal as healthy. Restart the backend after the service is ready.</p>
+<p align="justify">If the log contains <code>UNAVAILABLE</code>, <code>Connection refused</code>, or <code>localhost:7233</code>, the backend is configured for Temporal mode but the Temporal server is not running. From the <code>backend</code> folder, run <code>docker compose up -d temporal</code> or <code>docker compose up -d mongodb temporal</code> for the full setup, then wait until <code>docker compose ps</code> shows Temporal as healthy. Restart the backend after the service is ready.</p>
 
 <p align="justify">For IntelliJ IDEA, make sure the run configuration's <b>Working directory</b> is the <code>backend</code> folder (Spring Boot loads <code>.env</code> from this folder) so Spring Boot can load <code>.env</code>. If you want to run without Temporal, set <code>TEMPORAL_ENABLED=false</code> in <code>backend/.env</code>, start MongoDB only, and restart the backend.</p>
 
@@ -305,7 +305,7 @@ docker compose logs --tail 100 temporal
 ## **📝 Important notes and limitations**
 
 - Drone movement, GPS, battery, and mission actions are simulated.
-- MongoDB stores each drone's current state and each mission's latest state. It does not store every GPS waypoint as a separate history record.
-- Local demo mode keeps active mission progress in memory. An active simulation will not resume after the backend stops.
+- MongoDB does not store every GPS waypoint as a separate history record.
+- An active simulation will not resume after the backend stops in Local demo mode.
 - Use Temporal mode when durable workflow execution and workflow history are needed.
 - Cesium ion is optional. Terrain imagery works without a token; 3D ground elevation requires one.
