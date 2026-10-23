@@ -1,0 +1,16 @@
+.refresh-button:disabled {
+	cursor: wait;
+	opacity: 0.8;
+}
+.refresh-icon {
+	display: block;
+	transform-origin: center;
+}
+.refresh-icon.is-refreshing {
+	animation: refresh-spin 0.65s linear infinite;
+}
+@keyframes refresh-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
