@@ -1,3 +1,15 @@
+<div align="center">
+<!-- Light Mode Header -->
+<a href="https://github.com/G1thub-05#gh-light-mode-only">
+  <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:00c6ff,50:0072ff,100:8e2de2&height=260&section=header&text=AeroSaga%20—%20Drone%20Mission%20Control&fontSize=35&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Takeoff%20%7C%20Navigate%20%7C%20Drop%20Package%20%7C%20Return%20to%20Base&descAlignY=58&descSize=18"/>
+</a>
+
+<!-- Dark Mode Header -->
+<a href="https://github.com/G1thub-05#gh-dark-mode-only">
+  <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:ff512f,50:dd2476,100:ff0000&height=260&section=header&text=AeroSaga%20—%20Drone%20Mission%20Control&fontSize=35&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Takeoff%20%7C%20Navigate%20%7C%20Drop%20Package%20%7C%20Return%20to%20Base&descAlignY=58&descSize=18"/>
+</a>
+</div>
+
 ## **🚁 Project overview: AeroSaga — Drone Mission Control**
 
 <p align="justify">
@@ -126,14 +138,15 @@ AeroSaga supports two execution modes for managing and simulating drone missions
    │ MongoDB App data │      │ Temporal Workflows │
    └──────────────────┘      └────────────────────┘
 ```
+
 ## **⚙️ Full Setup Guide: Temporal workflow mode**
 
 <p align="justify">This setup runs MongoDB and Temporal to support durable mission orchestration. Temporal keeps tracks workflow progress and allows workflows to resume after backend interruptions. Using Temporal is best for demonstrating durable mission orchestration. Without Temporal, the local simulator starts faster and is suitable for basic UI/API demonstrations. However, active mission progress is stored in memory and will not resume if the backend stops. MongoDB still persists drone data and the latest mission state. The first run needs an internet connection so Docker, Maven, and npm can download the project dependencies and service images. If using IntelliJ IDEA, open <code>backend/pom.xml</code> as a Maven project and set the Project SDK to Java 21. Follow the steps below to configure the environment, start the required services, and run the backend and frontend.</p>
 
-| Mode           | Set `TEMPORAL_ENABLED`    | Start              | Why Choose it                                                                  |
-| :------------- | :------------------------ | :----------------- | :----------------------------------------------------------------------------- |
-| Full workflow  | `TEMPORAL_ENABLED=true`   | MongoDB + Temporal | For durable pause/resume, and Temporal's workflow execution history.           |
-| Local demo     | `TEMPORAL_ENABLED=false`  | Only MongoDB       | To try the UI and mission simulation with fewer services and without Temporal. |
+| Mode          | Set `TEMPORAL_ENABLED`   | Start              | Why Choose it                                                                  |
+| :------------ | :----------------------- | :----------------- | :----------------------------------------------------------------------------- |
+| Full workflow | `TEMPORAL_ENABLED=true`  | MongoDB + Temporal | For durable pause/resume, and Temporal's workflow execution history.           |
+| Local demo    | `TEMPORAL_ENABLED=false` | Only MongoDB       | To try the UI and mission simulation with fewer services and without Temporal. |
 
 ## **Step 1 — Create backend environment file**
 
@@ -309,3 +322,16 @@ docker compose logs --tail 100 temporal
 - An active simulation will not resume after the backend stops in Local demo mode.
 - Use Temporal mode when durable workflow execution and workflow history are needed.
 - Cesium ion is optional. Terrain imagery works without a token; 3D ground elevation requires one.
+
+<!-- Footer -->
+<div align="center">
+<!-- Light Mode Footer -->
+<a href="https://github.com/G1thub-05#gh-light-mode-only">
+  <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:00c6ff,50:0072ff,100:8e2de2&height=120&section=footer"/>
+</a>
+
+<!-- Dark Mode Footer -->
+<a href="https://github.com/G1thub-05#gh-dark-mode-only">
+  <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:ff512f,50:dd2476,100:ff0000&height=120&section=footer"/>
+</a>
+</div>
