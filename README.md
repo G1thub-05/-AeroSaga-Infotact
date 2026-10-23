@@ -244,3 +244,15 @@ docker compose ps                         # Shows the status of MongoDB containe
 5. Start the frontend development server: `npm run dev`
 6. Open the local URL displayed in the terminal, typically `http://localhost:5173`, in your browser.
 7. Ensure the backend is running before testing features that require API access.
+
+### **🌐 Useful Links**
+
+```powershell
+1. MongoDB addresses:           mongodb://localhost:27017/aerosaga     # Local MongoDB does not require a username or password in this setup.
+2. Temporal addresses:          http://localhost:7233
+3. Temporal Web UI addresses:   http://localhost:18233
+4. Backend health addresses:    http://localhost:8080/api/health
+5. Fleet API addresses:         http://localhost:8080/api/fleet
+6. Saved missions addresses:    http://localhost:8080/api/missions
+7. Dashboard addresses:         http://localhost:5173 if blank, try http://127.0.0.1:5173
+```
