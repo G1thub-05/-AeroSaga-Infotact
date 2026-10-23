@@ -191,3 +191,14 @@ cd "D:\-AeroSaga-Infotact"                # Navigate to your project folder
 Test-Path .\backend\docker-compose.yml    # Verify the Docker Compose file exists (should print `True`)
 cd backend                                # Navigate to the backend folder for Docker steps
 ```
+
+## **⚙️ Option A — MongoDB + Temporal Setup (with Docker)**
+
+<p align="justify">This mode starts MongoDB and Temporal in the background using Docker Compose. MongoDB stores drone data and mission state, while Temporal manages durable mission workflows and tracks their progress. This setup is recommended when you want to demonstrate complete mission orchestration and workflow recovery after backend interruptions.</p>
+
+```powershell
+docker compose up -d mongodb temporal     # Start MongoDB and Temporal using Docker Compose in the background
+docker compose ps                         # Shows the status of MongoDB and Temporal container
+```
+
+<p align="justify">Wait until both containers show as healthy/running before starting the backend, if health checks are configured. If one is still starting, run <code>docker compose ps</code> again after a short wait. Once the required services are ready, start the backend and frontend using the project's setup instructions. This mode enables workflow history and durable mission execution by running MongoDB and Temporal alongside the application.</p>
