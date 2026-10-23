@@ -267,3 +267,15 @@ docker compose ps                         # Shows the status of MongoDB containe
 6. To see compensation, enable **Simulate drop activity failure** before dispatch.
 
 <p align="justify">The outbound route appears green and the return route amber. A complete delivery and return takes about 30–35 seconds in the simulator; aborting starts the return immediately, which takes up to about 15 seconds. The drone being returned stays unavailable until it reaches base, but other available drones can be dispatched meanwhile.</p>
+
+## **📘 See the saved MongoDB data in both options**
+
+<p align="justify">The app creates the `aerosaga` database and <code>drones</code> collection during backend startup. The <code.missions> collection appears after the first mission is dispatched. Both server options use the same database and collection names, but their stored data is separate: Docker MongoDB uses the <code>mongodb-data</code> volume, while Windows MongoDB uses its own local data folder. Compass shows whichever server is currently listening on port <code>27017</code>.</p>
+
+```text
+1. Open **MongoDB Compass** and connect to `mongodb://localhost:27017` for either Docker MongoDB or Windows MongoDB.
+2. In the database list, open **`aerosaga`** and Open **`drones`** to inspect the 50 seeded drones details.
+3. Dispatch a mission in AeroSaga, then open or refresh **`missions`** to inspect its latest status and coordinates.
+4. The data belongs to Docker's **`mongodb-data`** volume. It remains when you stop the container with `docker compose down`.
+5. Deleting volumes with `docker compose down -v` removes it.
+```
