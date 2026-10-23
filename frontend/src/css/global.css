@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+:root {
+	font-family: "DM Sans", sans-serif;
+	color: #d9e4ee;
+	background: #08121d;
+	font-synthesis: none;
+	text-rendering: optimizeLegibility;
+	font-smooth: always;
+	font-weight: 400;
+}
+* {
+	box-sizing: border-box;
+}
+body {
+	margin: 0;
+	min-width: 360px;
+	min-height: 100vh;
+	background: #08121d;
+}
+button,
+input {
+	font: inherit;
+}
+.app-shell {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	background: radial-gradient(
+		ellipse at 61% 40%,
+		#102333 0,
+		#091622 48%,
+		#08121d 100%
+	);
+}
