@@ -234,3 +234,13 @@ docker compose ps                         # Shows the status of MongoDB containe
 4. By default, the backend connects to MongoDB and Temporal. Keep this terminal open.
 5. Open a PowerShell terminal in the `backend` folder and run: `mvn spring-boot:run`
 6. Before starting the backend, ensure Docker is running and both MongoDB and Temporal containers are up and healthy.
+
+## **Step 5 — Start the frontend**
+
+1. In Visual Studio Code, choose **File → Open** and open `D:\-AeroSaga-Infotact\frontend`- the folder containing `package.json`.
+2. Open a terminal in Visual Studio Code using Terminal → New Terminal.
+3. Ensure the terminal is in the frontend folder and then install the frontend dependencies: `npm install`
+4. The `npm install` is only needed the first time or after frontend dependency changes
+5. Start the frontend development server: `npm run dev`
+6. Open the local URL displayed in the terminal, typically `http://localhost:5173`, in your browser.
+7. Ensure the backend is running before testing features that require API access.
