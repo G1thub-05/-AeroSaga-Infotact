@@ -157,3 +157,13 @@ TEMPORAL_BIND_ADDRESS   -     127.0.0.1                           -  Host addres
 TEMPORAL_GRPC_PORT      -     7233                                -  Host port for Temporal gRPC.
 TEMPORAL_UI_PORT        -     18233                               -  Host port for Temporal web UI.
 ```
+
+## **Step 2 — Create frontend environment file**
+
+<p align="justify">Create a .env file inside the frontend folder by copying <code>frontend/.env.example</code>. Keep <code>VITE_API_URL=http://localhost:8080</code> as the default API URL. Add a Cesium ion token only if you need optional 3D terrain elevation.</p>
+
+```powershell
+# Frontend settings (read with --env-file frontend/.env)
+VITE_API_URL            -     http://localhost:8080               -  Backend URL used by the frontend.
+VITE_CESIUM_ION_TOKEN  -      your_cesium_ion_token               -  Optional Cesium ion token.
+```
