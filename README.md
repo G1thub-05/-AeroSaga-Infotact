@@ -181,3 +181,13 @@ VITE_CESIUM_ION_TOKEN  -      your_cesium_ion_token               -  Optional Ce
 ```
 
 <p align="justify"> <b>Note:</b> The real .env files contain local configuration and should not be committed to Git and are ignored by Git. Keep the .env.example files as templates. Docker Compose can load the backend settings explicitly using --env-file backend/.env when run from the project root; this lets it use the port values shown there.</p>
+
+## **Step 3 — Open the project folder**
+
+<p align="justify"> Open your project folder in PowerShell. If your project folder has a different name or is located in another directory, use its actual path. For the Docker steps, navigate to the <code>backend</code> folder inside your project directory. This folder contains <code>docker-compose.yml</code> and <code>.env</code>. For example if your project is located at <code>D:\-AeroSaga-Infotact</code>, open PowerShell in that folder and run the Docker commands from its <code>backend</code> subfolder. Replace this example path with your project's actual location.</p>
+
+```powershell
+cd "D:\-AeroSaga-Infotact"                # Navigate to your project folder
+Test-Path .\backend\docker-compose.yml    # Verify the Docker Compose file exists (should print `True`)
+cd backend                                # Navigate to the backend folder for Docker steps
+```
