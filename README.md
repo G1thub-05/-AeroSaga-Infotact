@@ -225,3 +225,12 @@ docker compose ps                         # Shows the status of MongoDB containe
 6. Do not run the Docker MongoDB container and the Windows MongoDB service on the same port (`27017`) at the same time.
 7. Choose one database server. Docker-based Temporal still needs Docker when `TEMPORAL_ENABLED=true`.
 ```
+
+## **Step 4 — Start the backend**
+
+1. In IntelliJ, choose **File → Open** and open `D:\-AeroSaga-Infotact\backend`- the folder containing `pom.xml`.
+2. Choose to open/import it as a Maven project when prompted and wait for Maven sync to finish.
+3. Under **File → Project Structure → Project**, set the Project SDK to Java 21.
+4. By default, the backend connects to MongoDB and Temporal. Keep this terminal open.
+5. Open a PowerShell terminal in the `backend` folder and run: `mvn spring-boot:run`
+6. Before starting the backend, ensure Docker is running and both MongoDB and Temporal containers are up and healthy.
