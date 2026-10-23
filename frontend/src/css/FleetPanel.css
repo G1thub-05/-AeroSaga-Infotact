@@ -1,0 +1,205 @@
+.search {
+	height: 32px;
+	margin: 2px 12px 12px;
+	border: 1px solid #263744;
+	background: #09141e;
+	border-radius: 5px;
+	display: flex;
+	align-items: center;
+	gap: 7px;
+	padding: 0 8px;
+	color: #718899;
+}
+.search input {
+	border: 0;
+	outline: 0;
+	background: transparent;
+	color: #d8e4ed;
+	width: 100%;
+	font-size: 11px;
+}
+.search input::placeholder {
+	color: #627888;
+}
+.search kbd {
+	white-space: nowrap;
+	font: 9px "DM Mono";
+	border: 1px solid #263845;
+	border-radius: 3px;
+	padding: 2px 4px;
+	color: #6e8392;
+}
+.fleet-tabs {
+	height: 35px;
+	border-top: 1px solid #1b2c39;
+	border-bottom: 1px solid #1b2c39;
+	display: flex;
+	align-items: stretch;
+	padding: 0 12px;
+	gap: 17px;
+	color: #718898;
+	font: 8px "DM Mono";
+	letter-spacing: 0.06em;
+}
+.fleet-tabs span {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+.fleet-tabs b {
+	font-weight: 400;
+	color: #9ab0be;
+}
+.fleet-tabs .active {
+	color: #4bd8b8;
+	border-bottom: 1px solid #4bd8b8;
+}
+.drone-list {
+	overflow-y: auto;
+	flex: 1;
+}
+.drone-row {
+	width: 100%;
+	border: 0;
+	border-bottom: 1px solid #192a36;
+	background: transparent;
+	display: flex;
+	align-items: center;
+	padding: 9px 11px;
+	gap: 9px;
+	text-align: left;
+	color: #dbe6ee;
+	cursor: pointer;
+}
+.drone-row:hover,
+.drone-row.selected {
+	background: #122532;
+}
+.drone-row.selected {
+	box-shadow: inset 2px 0 #37d2ad;
+}
+.drone-symbol {
+	width: 31px;
+	height: 31px;
+	display: grid;
+	place-items: center;
+	border-radius: 6px;
+	background: #172530;
+	color: #8da3b2;
+	flex: none;
+}
+.drone-symbol.mint {
+	color: #42dabb;
+	background: #112c2a;
+}
+.drone-symbol.amber {
+	color: #f3b450;
+	background: #312719;
+}
+.drone-symbol.blue {
+	color: #95afff;
+	background: #1c2944;
+}
+.drone-symbol.red {
+	color: #f77b7b;
+	background: #351f23;
+}
+.drone-info {
+	flex: 1;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+}
+.drone-info strong {
+	font: 11px "Space Grotesk";
+	display: flex;
+	justify-content: space-between;
+}
+.drone-info strong small {
+	color: #698091;
+	font: 8px "DM Mono";
+}
+.status {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	text-transform: uppercase;
+	font: 8px "DM Mono";
+	letter-spacing: 0.04em;
+	color: #8195a2;
+}
+.status i {
+	width: 5px;
+	height: 5px;
+	background: #8293a7;
+	border-radius: 50%;
+}
+.status.mint {
+	color: #52dabc;
+}
+.status.mint i {
+	background: #47d7b5;
+}
+.status.amber {
+	color: #eeb554;
+}
+.status.amber i {
+	background: #eeb554;
+}
+.status.blue {
+	color: #99afff;
+}
+.status.blue i {
+	background: #99afff;
+}
+.status.red {
+	color: #f77b7b;
+}
+.status.red i {
+	background: #f77b7b;
+}
+.drone-battery {
+	display: flex;
+	align-items: center;
+	gap: 3px;
+	color: #91a5b3;
+	font: 9px "DM Mono";
+}
+.drone-battery svg:last-child {
+	color: #5c7282;
+	margin-left: 3px;
+}
+.fleet-footer {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px 13px;
+	padding: 11px 13px;
+	border-top: 1px solid #1b2c39;
+	color: #8fa3b0;
+	font: 8px "DM Mono";
+}
+.fleet-footer span {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+}
+.legend-dot {
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	display: inline-block;
+	background: #8293a7;
+}
+.legend-dot.mint {
+	background: #3fd6b3;
+}
+.legend-dot.amber {
+	background: #eab04e;
+}
+.legend-dot.blue {
+	background: #91aaff;
+}
+.legend-dot.red {
+	background: #f77b7b;
+}
