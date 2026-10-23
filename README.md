@@ -233,11 +233,11 @@ docker compose ps                         # Shows the status of MongoDB containe
 3. Under **File → Project Structure → Project**, set the Project SDK to Java 21.
 4. By default, the backend connects to MongoDB and Temporal. Keep this terminal open.
 5. Open a PowerShell terminal in the `backend` folder and run: `mvn spring-boot:run`
-6. Before starting the backend, ensure Docker is running and both MongoDB and Temporal containers are up and healthy.
+6. Before starting backend, ensure Docker is running and both MongoDB and Temporal containers are up and healthy.
 
 ## **Step 5 — Start the frontend**
 
-1. In Visual Studio Code, choose **File → Open** and open `D:\-AeroSaga-Infotact\frontend`- the folder containing `package.json`.
+1. In VS Code, choose **File → Open** and open `D:\-AeroSaga-Infotact\frontend`- folder containing `package.json`.
 2. Open a terminal in Visual Studio Code using Terminal → New Terminal.
 3. Ensure the terminal is in the frontend folder and then install the frontend dependencies: `npm install`
 4. The `npm install` is only needed the first time or after frontend dependency changes
@@ -278,4 +278,26 @@ docker compose ps                         # Shows the status of MongoDB containe
 3. Dispatch a mission in AeroSaga, then open or refresh **`missions`** to inspect its latest status and coordinates.
 4. The data belongs to Docker's **`mongodb-data`** volume. It remains when you stop the container with `docker compose down`.
 5. Deleting volumes with `docker compose down -v` removes it.
+```
+
+## **🛠️ Troubleshooting**
+
+### **1. Backend cannot connect to MongoDB or Temporal**
+
+<p align="justify">Check that exactly one MongoDB server is running on port `27017`. For Docker, check <code>docker compose ps</code> and start it with <code>docker compose up -d mongodb</code>. For a Windows installation, open Services and start the MongoDB Server service. Keep <code>MONGODB_URI</code> pointed at the host and port where MongoDB is listening, then restart the backend.
+
+If the log contains <code>UNAVAILABLE</code>, <code>Connection refused</code>, or <code>localhost:7233</code>, the backend is configured for Temporal mode but the Temporal server is not running. From the <code>backend</code> folder, run <code>docker compose up -d temporal</code> or <code>docker compose up -d mongodb temporal</code> for the full setup, then wait until <code>docker compose ps</code> shows Temporal as healthy. Restart the backend after the service is ready.</p>
+
+<p align="justify">For IntelliJ IDEA, make sure the run configuration's <b>Working directory</b> is the <code>backend</code> folder (Spring Boot loads <code>.env</code> from this folder) so Spring Boot can load <code>.env</code>. If you want to run without Temporal, set <code>TEMPORAL_ENABLED=false</code> in <code>backend/.env</code>, start MongoDB only, and restart the backend.</p>
+
+---
+
+### **2. A port is already in use**
+
+<p align="justify">Default ports are <code>27017</code> (MongoDB), <code>7233</code> and <code>18233</code> (Temporal), <code>8080</code> (backend), and <code>5173</code> (Vite). Stop the other process, or change the matching port in <code>backend/.env</code>. Docker Compose reads those values because the documented commands pass <code>--env-file backend/.env</code>. From the project root, recreate the Temporal container and check its logs:</p>
+
+```powershell
+docker compose up -d --force-recreate temporal
+docker compose ps
+docker compose logs --tail 100 temporal
 ```
