@@ -134,3 +134,26 @@ AeroSaga supports two execution modes for managing and simulating drone missions
 | :------------- | :------------------------ | :----------------- | :----------------------------------------------------------------------------- |
 | Full workflow  | `TEMPORAL_ENABLED=true`   | MongoDB + Temporal | For durable pause/resume, and Temporal's workflow execution history.           |
 | Local demo     | `TEMPORAL_ENABLED=false`  | Only MongoDB       | To try the UI and mission simulation with fewer services and without Temporal. |
+
+## **Step 1 — Create backend environment file**
+
+<p align="justify">Create a .env file inside the backend folder by copying backend/.env.example. Keep the default MongoDB and Temporal settings for the standard setup. Set <code>TEMPORAL_ENABLED=false</code> only if you want to run the application in local demo mode without Temporal. If <code>backend/.env</code> already exists, keep it and modify only the settings you need.</p>
+
+```powershell
+# Backend settings loaded by Spring Boot from this folder.
+PORT                    -     8080                                -  Backend HTTP port.
+MONGODB_URI             -     mongodb://localhost:27017/aerosaga  -  MongoDB connection string.
+TEMPORAL_ENABLED        -     true                                -  Set to `false` for the local simulator.
+TEMPORAL_ADDRESS        -     localhost:7233                      -  Temporal server address.
+TEMPORAL_NAMESPACE      -     default                             -  Temporal namespace.
+TEMPORAL_TASK_QUEUE     -     aerosaga-missions                   -  Workflow task queue.
+```
+
+```powershell
+# Docker Compose host port settings (read with --env-file backend/.env)
+MONGO_BIND_ADDRESS      -     127.0.0.1                           -  Host address for the MongoDB container.
+MONGO_PORT              -     27017                               -  Host port mapped to MongoDB.
+TEMPORAL_BIND_ADDRESS   -     127.0.0.1                           -  Host address for Temporal ports.
+TEMPORAL_GRPC_PORT      -     7233                                -  Host port for Temporal gRPC.
+TEMPORAL_UI_PORT        -     18233                               -  Host port for Temporal web UI.
+```
