@@ -1,0 +1,443 @@
+@media (max-width: 1180px) {
+	.workspace {
+		grid-template-columns: 220px minmax(320px, 1fr) 285px;
+		padding: 0 12px 12px;
+		gap: 9px;
+	}
+	.metrics {
+		padding: 13px 14px;
+		grid-template-columns: repeat(4, 1fr);
+	}
+	.weather {
+		display: none;
+	}
+	.metric {
+		padding: 9px;
+		gap: 8px;
+	}
+	.metric-icon {
+		width: 29px;
+		height: 29px;
+	}
+	.fleet-panel,
+	.detail-panel {
+		max-height: calc(100vh - 230px);
+	}
+}
+@media (max-width: 900px) {
+	.workspace {
+		grid-template-columns: 210px minmax(0, 1fr);
+	}
+	.detail-panel {
+		grid-column: 1/-1;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		align-items: start;
+	}
+	.detail-heading,
+	.unit-id,
+	.detail-stats,
+	.section-label,
+	.field-label,
+	.coordinate-fields,
+	.dispatch-button,
+	.abort-button,
+	.connect-actions,
+	.mission-heading,
+	.workflow,
+	.message-box {
+		grid-column: auto;
+	}
+	.map-frame {
+		min-height: 470px;
+	}
+	.fleet-panel {
+		max-height: 600px;
+	}
+	.metrics {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.operator {
+		display: none;
+	}
+}
+@media (max-width: 620px) {
+	.topbar {
+		height: 58px;
+		padding: 0 12px;
+	}
+	.top-status {
+		font-size: 8px;
+	}
+	.cluster {
+		display: none;
+	}
+	.workspace {
+		display: flex;
+		flex-direction: column;
+		padding: 0 10px 12px;
+	}
+	.map-section {
+		order: 0;
+	}
+	.map-frame {
+		min-height: 360px;
+	}
+	.fleet-panel {
+		order: 1;
+		max-height: 340px;
+	}
+	.detail-panel {
+		order: 2;
+		display: flex;
+	}
+	.metrics {
+		padding: 10px;
+		gap: 6px;
+	}
+	.metric {
+		min-height: 59px;
+	}
+	.metric strong {
+		font-size: 14px;
+	}
+	.metric-label,
+	.metric small {
+		font-size: 7px;
+	}
+	.metric-icon {
+		width: 25px;
+		height: 25px;
+	}
+	.map-top {
+		padding-top: 12px;
+	}
+	.map-tools > span {
+		display: none;
+	}
+	.map-coordinates {
+		font-size: 7px;
+	}
+	.footer {
+		padding: 0 10px;
+		font-size: 7px;
+	}
+	.footer span:last-child {
+		display: none;
+	}
+}
+.failure-toggle {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin: 8px 15px 0;
+	color: #b6a175;
+	font:
+		8px DM Mono,
+		monospace;
+	cursor: pointer;
+}
+.failure-toggle input {
+	accent-color: #e6a746;
+}
+.live-position {
+	position: absolute;
+	z-index: 3;
+	top: 12px;
+	right: 12px;
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+	min-width: 175px;
+	padding: 9px 11px;
+	border: 1px solid #294554;
+	border-radius: 6px;
+	background: #091722ef;
+	box-shadow: 0 8px 24px #0005;
+	pointer-events: none;
+}
+.live-position > i {
+	width: 7px;
+	height: 7px;
+	margin-top: 3px;
+	border-radius: 50%;
+	background: #40d8b5;
+	box-shadow: 0 0 9px #40d8b5;
+}
+.live-position > div {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+.live-position span {
+	font:
+		8px DM Mono,
+		monospace;
+	letter-spacing: 0.07em;
+	color: #91a8b6;
+}
+.live-position strong {
+	font:
+		10px DM Mono,
+		monospace;
+	color: #e3edf3;
+}
+.live-position small {
+	font:
+		7px DM Mono,
+		monospace;
+	color: #4bd6b3;
+}
+.route-legend {
+	display: flex;
+	align-items: center;
+	gap: 4px !important;
+}
+.route-legend i {
+	display: inline-block;
+	width: 14px;
+	border-top: 2px solid #42e0bd;
+}
+.route-legend i.return-line {
+	border-top: 2px dashed #f5ad4f;
+}
+
+.place-search {
+	display: flex;
+	gap: 6px;
+	margin: 0 15px 8px;
+}
+.place-search input {
+	height: 30px;
+	min-width: 0;
+	flex: 1;
+	border: 1px solid #293b49;
+	border-radius: 4px;
+	background: #09151f;
+	color: #d4e1e9;
+	padding: 0 8px;
+	font:
+		9px "DM Sans",
+		sans-serif;
+	outline: none;
+}
+.place-search input:focus {
+	border-color: #3bb99e;
+}
+.place-search input::placeholder {
+	color: #627888;
+}
+.place-search button {
+	border: 1px solid #347267;
+	border-radius: 4px;
+	background: #102722;
+	color: #54d9b8;
+	padding: 0 10px;
+	font:
+		8px "DM Mono",
+		monospace;
+	cursor: pointer;
+}
+.place-search button:disabled {
+	opacity: 0.5;
+	cursor: wait;
+}
+.destination-label {
+	padding-top: 7px;
+}
+.locate-button {
+	width: auto;
+	min-height: 32px;
+	padding: 0 11px;
+	gap: 7px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #347c70;
+	border-radius: 7px;
+	background: linear-gradient(180deg, #15352f, #102722);
+	color: #8debd4;
+	font:
+		600 8px "DM Mono",
+		monospace;
+	letter-spacing: 0.07em;
+	white-space: nowrap;
+	box-shadow:
+		inset 0 1px #ffffff0a,
+		0 3px 10px #0003;
+	transition:
+		background 150ms ease,
+		border-color 150ms ease,
+		transform 150ms ease,
+		box-shadow 150ms ease;
+}
+.locate-button:hover:not(:disabled) {
+	border-color: #57d9bb;
+	background: linear-gradient(180deg, #1b4a40, #12352e);
+	color: #c3fff0;
+	box-shadow:
+		0 0 0 3px #39d4b31c,
+		0 5px 14px #0004;
+	transform: translateY(-1px);
+}
+.locate-button:disabled {
+	border-color: #293b49;
+	background: #111f2a;
+	color: #617785;
+	cursor: not-allowed;
+	box-shadow: none;
+}
+
+/* Cleaner, more legible control-room surfaces and map controls. */
+.app-shell {
+	background: radial-gradient(
+		ellipse at 58% 38%,
+		#112b3b 0,
+		#0b1a27 48%,
+		#07111b 100%
+	);
+}
+.topbar {
+	background: #09141ff5;
+	backdrop-filter: blur(14px);
+}
+.metric,
+.fleet-panel,
+.detail-panel,
+.map-frame {
+	border-color: #233b4b;
+	border-radius: 11px;
+	box-shadow: 0 12px 32px #02080d40;
+}
+.metric {
+	background: linear-gradient(145deg, #102231e8, #0b1824e8);
+}
+.fleet-panel,
+.detail-panel {
+	background: linear-gradient(160deg, #10202df5, #0b1722f5);
+}
+.drone-row {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.drone-row.selected {
+	background: linear-gradient(90deg, #15342f, #122532);
+}
+.map-frame {
+	border-color: #2a4556;
+	box-shadow: 0 18px 44px #02070c66;
+}
+.basemap-switch {
+	position: absolute;
+	z-index: 4;
+	top: 13px;
+	left: 13px;
+	display: flex;
+	align-items: center;
+	gap: 3px;
+	padding: 4px;
+	border: 1px solid #52657399;
+	border-radius: 9px;
+	background: #091722ef;
+	box-shadow: 0 8px 22px #0006;
+	backdrop-filter: blur(12px);
+}
+.basemap-switch button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	min-height: 32px;
+	padding: 0 11px;
+	border: 1px solid transparent;
+	border-radius: 6px;
+	background: transparent;
+	color: #afc0ca;
+	font:
+		10px "DM Sans",
+		sans-serif;
+	font-weight: 600;
+	cursor: pointer;
+	transition:
+		background 0.16s ease,
+		color 0.16s ease,
+		border-color 0.16s ease;
+}
+.basemap-switch button:hover {
+	color: #eff8fb;
+	background: #203442;
+}
+.basemap-switch button.active {
+	color: #b9fff0;
+	border-color: #388a79;
+	background: linear-gradient(180deg, #17463e, #12372f);
+}
+button:focus-visible,
+input:focus-visible {
+	outline: 2px solid #51ddbc;
+	outline-offset: 2px;
+}
+@media (max-width: 620px) {
+	.basemap-switch {
+		top: 10px;
+		left: 10px;
+	}
+	.basemap-switch button {
+		min-height: 30px;
+		gap: 4px;
+		padding: 0 8px;
+		font-size: 9px;
+	}
+	.live-position {
+		top: 55px;
+		right: 10px;
+	}
+}
+
+/* Keep the desktop control room inside the browser viewport. */
+@media (min-width: 901px) {
+	html,
+	body,
+	#root {
+		height: 100%;
+		min-height: 0;
+		overflow: hidden;
+	}
+	.app-shell {
+		height: 100vh;
+		height: 100dvh;
+		min-height: 0;
+		overflow: hidden;
+	}
+	.topbar,
+	.metrics,
+	.footer {
+		flex: 0 0 auto;
+	}
+	.metrics {
+		padding-top: clamp(8px, 1.4vh, 16px);
+		padding-bottom: clamp(8px, 1.4vh, 16px);
+	}
+	.workspace {
+		flex: 1 1 0;
+		min-height: 0;
+		grid-template-rows: minmax(0, 1fr);
+		overflow: hidden;
+	}
+	.fleet-panel,
+	.detail-panel {
+		min-height: 0;
+		max-height: none;
+		overflow-x: hidden;
+		overflow-y: auto;
+		scrollbar-width: thin;
+		scrollbar-color: #355262 transparent;
+	}
+	.map-section {
+		min-height: 0;
+		overflow: hidden;
+	}
+	.map-frame {
+		min-height: 0;
+	}
+}
