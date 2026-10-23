@@ -256,3 +256,14 @@ docker compose ps                         # Shows the status of MongoDB containe
 6. Saved missions addresses:    http://localhost:8080/api/missions
 7. Dashboard addresses:         http://localhost:5173 if blank, try http://127.0.0.1:5173
 ```
+
+## **Step 6 — Open and try the demo**
+
+1. In **Fleet overview**, select one of the simulated drones around Raipur.
+2. Enter a destination by place name and click **Find**, or enter latitude/longitude directly and click **Dispatch mission**.
+3. Switch the map style between **Satellite**, **Terrain**, and **Street**.
+4. During flight, click **Simulate signal loss**, then reconnect the drone to see the mission pause and resume.
+5. Click **Emergency abort** during a mission to request a safe return.
+6. To see compensation, enable **Simulate drop activity failure** before dispatch.
+
+<p align="justify">The outbound route appears green and the return route amber. A complete delivery and return takes about 30–35 seconds in the simulator; aborting starts the return immediately, which takes up to about 15 seconds. The drone being returned stays unavailable until it reaches base, but other available drones can be dispatched meanwhile.</p>
