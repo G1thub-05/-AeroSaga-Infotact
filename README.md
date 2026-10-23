@@ -167,3 +167,17 @@ TEMPORAL_UI_PORT        -     18233                               -  Host port f
 VITE_API_URL            -     http://localhost:8080               -  Backend URL used by the frontend.
 VITE_CESIUM_ION_TOKEN  -      your_cesium_ion_token               -  Optional Cesium ion token.
 ```
+
+## **📁 Where to Put the Environment Files**
+
+```text
+-AeroSaga-Infotact/
+├── backend/
+│   ├── .env                  # Create locally from backend/.env.example
+│   └── .env.example          # Backend settings template
+└── frontend/
+    ├── .env                  # Create locally from frontend/.env.example
+    └── .env.example          # Frontend settings template
+```
+
+<p align="justify"> <b>Note:</b> The real .env files contain local configuration and should not be committed to Git and are ignored by Git. Keep the .env.example files as templates. Docker Compose can load the backend settings explicitly using --env-file backend/.env when run from the project root; this lets it use the port values shown there.</p>
