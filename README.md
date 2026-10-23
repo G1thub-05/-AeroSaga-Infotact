@@ -301,3 +301,11 @@ docker compose up -d --force-recreate temporal
 docker compose ps
 docker compose logs --tail 100 temporal
 ```
+
+## **📝 Important notes and limitations**
+
+- Drone movement, GPS, battery, and mission actions are simulated.
+- MongoDB stores each drone's current state and each mission's latest state. It does not store every GPS waypoint as a separate history record.
+- Local demo mode keeps active mission progress in memory. An active simulation will not resume after the backend stops.
+- Use Temporal mode when durable workflow execution and workflow history are needed.
+- Cesium ion is optional. Terrain imagery works without a token; 3D ground elevation requires one.
