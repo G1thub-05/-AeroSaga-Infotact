@@ -213,3 +213,15 @@ docker compose ps                         # Shows the status of MongoDB containe
 ```
 
 <p align="justify">Wait until MongoDB is running and healthy, if health checks are configured, before starting the backend. The MongoDB container should be running and ready for the backend to connect. Ensure TEMPORAL_ENABLED=false is configured in the backend .env file for local demo mode.</p>
+
+## **⚙️ Option C — MongoDB installed directly on Windows (without Docker)**
+
+```text
+1. Install **MongoDB Community Server** for Windows. During installation, enable **Install MongoD as a Service** so MongoDB starts as a Windows service.
+2. Open the Windows **Services** app, find the MongoDB Server service, and start it if it is not already running.
+3. Keep `MONGODB_URI=mongodb://localhost:27017/aerosaga` in `backend/.env`.
+4. For Temporal workflow mode, open PowerShell in the `backend` folder and run `docker compose up -d temporal`. MongoDB itself will run from the Windows service.
+5. For local demo mode (`TEMPORAL_ENABLED=false`), no Docker service is needed; the Windows MongoDB service is enough.
+6. Do not run the Docker MongoDB container and the Windows MongoDB service on the same port (`27017`) at the same time.
+7. Choose one database server. Docker-based Temporal still needs Docker when `TEMPORAL_ENABLED=true`.
+```
