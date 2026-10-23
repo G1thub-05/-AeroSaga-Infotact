@@ -202,3 +202,14 @@ docker compose ps                         # Shows the status of MongoDB and Temp
 ```
 
 <p align="justify">Wait until both containers show as healthy/running before starting the backend, if health checks are configured. If one is still starting, run <code>docker compose ps</code> again after a short wait. Once the required services are ready, start the backend and frontend using the project's setup instructions. This mode enables workflow history and durable mission execution by running MongoDB and Temporal alongside the application.</p>
+
+## **⚙️ Option B — Only MongoDB Setup for Local demo (with Docker)**
+
+<p align="justify">This mode starts only MongoDB in the background using Docker Compose, without starting Temporal. It is suitable for quick startup and basic UI/API demonstrations where durable workflow orchestration is not required. MongoDB stores drone data and the latest mission state, while active mission progress remains in backend memory and is lost when the backend stops.</p>
+
+```powershell
+docker compose up -d mongodb              # Start MongoDB only without Temporal using Docker Compose in the background
+docker compose ps                         # Shows the status of MongoDB container
+```
+
+<p align="justify">Wait until MongoDB is running and healthy, if health checks are configured, before starting the backend. The MongoDB container should be running and ready for the backend to connect. Ensure TEMPORAL_ENABLED=false is configured in the backend .env file for local demo mode.</p>
