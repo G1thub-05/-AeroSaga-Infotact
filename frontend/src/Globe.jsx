@@ -70,7 +70,9 @@ export default function Globe({
 					if (active && !instance.isDestroyed())
 						instance.terrainProvider = terrain;
 				})
-				.catch(() => {});
+				.catch((error) => {
+					console.error("Cesium terrain loading failed:", error);
+				});
 
 		return () => {
 			active = false;
@@ -83,16 +85,30 @@ export default function Globe({
 
 	useEffect(() => {
 		const v = viewer.current;
-		if (!v) return;
+		if (!v || v.isDestroyed()) return;
 		v.imageryLayers.removeAll();
-		const add = (url, credit, maximumLevel = 19) =>
-			v.imageryLayers.addImageryProvider(
-				new UrlTemplateImageryProvider({ url, credit, maximumLevel }),
-			);
+
+		const add = (url, credit) => {
+			const provider = new UrlTemplateImageryProvider({
+				url,
+				credit,
+				maximumLevel: 19,
+			});
+
+			provider.errorEvent.addEventListener((error) => {
+				console.error("Imagery tile error:", error);
+			});
+
+			const layer = v.imageryLayers.addImageryProvider(provider);
+			console.log("Added layer:", url);
+			console.log("Current layer count:", v.imageryLayers.length);
+			return layer;
+		};
+
 		if (mapStyle === "satellite") {
 			add(
 				"https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-				"Tiles © Esri — Sources: Esri, Maxar, Earthstar Geographics",
+				"Tiles © Esri",
 			);
 			add(
 				"https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}",
@@ -101,15 +117,16 @@ export default function Globe({
 		} else if (mapStyle === "terrain") {
 			add(
 				"https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}",
-				"Tiles © Esri — Sources: Esri, Garmin, USGS, NOAA",
+				"Tiles © Esri",
 			);
 		} else {
 			add(
 				"https://tile.openstreetmap.org/{z}/{x}/{y}.png",
 				"© OpenStreetMap contributors",
-				19,
 			);
 		}
+
+		console.log("Final imagery layer count:", v.imageryLayers.length);
 	}, [mapStyle]);
 
 	useEffect(() => {
