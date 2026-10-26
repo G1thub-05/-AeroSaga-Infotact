@@ -25,8 +25,8 @@ import com.aerosaga.temporal.MissionRequest;
 import com.aerosaga.temporal.MissionState;
 import com.aerosaga.persistence.PersistenceService;
 
-@RestController
-@RequestMapping("/api")
+@RestController             // Marks this class as a REST controller so Spring can handle HTTP requests.
+@RequestMapping("/api")  // Sets the common URL prefix for all endpoints in this controller.
 
 // Allows frontend applications running on these local development
 @CrossOrigin(origins = { "http://localhost:5173", "http://127.0.0.1:5173" })
@@ -47,13 +47,7 @@ public class LocalDemoController {
 	// Returns basic information about the backend's health and operating mode.
 	@GetMapping("/health")
 	public Map<String, String> health() {
-		return Map.of(
-				"status",
-				"UP",
-				"service",
-				"AeroSaga local demo (Temporal disabled)",
-				"mode",
-				"LOCAL_SIMULATION");
+		return Map.of("status","UP", "service", "AeroSaga local demo (Temporal disabled)", "mode", "LOCAL_SIMULATION");
 	}
 
 	// Returns the current list of drones managed by FleetService.
@@ -84,7 +78,7 @@ public class LocalDemoController {
 			// Return HTTP 400 Bad Request for invalid destination coordinates.
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Destination latitude/longitude is out of range");
 
-		// Retrieve the requested drone from the fleet.
+		// Retrieve the requested drone from the fleet for this mission. Any exception from fleet.get() is handled according to FleetService behavior.
 		Drone drone;
 		try {
 			drone = fleet.get(input.droneId());
