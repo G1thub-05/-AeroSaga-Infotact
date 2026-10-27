@@ -70,6 +70,8 @@ public class MissionController {
     public Map<String, String> launch(@RequestBody LaunchRequest input) {
 
 	    // Validate destination coordinates:
+	    // Latitude: -90 se 90 tak — North/South position.
+	    // Longitude: -180 se 180 tak — East/West position.
         if (!Double.isFinite(input.destinationLat())
 		        || input.destinationLat() < -90
 		        || input.destinationLat() > 90

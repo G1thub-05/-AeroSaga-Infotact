@@ -30,4 +30,10 @@ export const api = {
 				headers: { "Accept-Language": "en" },
 			},
 		),
+
+	getWeather: (lat, lon, options) =>
+		request(
+			`/api/weather?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}`,
+			options,
+		),
 };
