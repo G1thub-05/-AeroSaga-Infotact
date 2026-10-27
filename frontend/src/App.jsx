@@ -1,8 +1,9 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
 	Activity,
 	Battery,
 	CircleAlert,
+	CloudLightning,
 	ChevronRight,
 	Crosshair,
 	MapPin,
@@ -60,6 +61,10 @@ export default function App() {
 	const [tracks, setTracks] = useState({});
 	const [refreshing, setRefreshing] = useState(false);
 	const [mapStyle, setMapStyle] = useState("satellite");
+
+	const [weather, setWeather] = useState(null);
+	const [weatherLoading, setWeatherLoading] = useState(false);
+
 	const updateDrone = useCallback(
 		(d) => setDrones((prev) => prev.map((old) => (old.id === d.id ? d : old))),
 		[],
@@ -165,6 +170,36 @@ export default function App() {
 		return () => clearInterval(timer);
 	}, [connected]);
 	const selected = drones.find((d) => d.id === selectedId) || drones[0];
+	const selectedRef = useRef(selected);
+	selectedRef.current = selected;
+
+	useEffect(() => {
+		let cancelled = false;
+		async function loadWeather() {
+			const drone = selectedRef.current;
+			if (!drone) return;
+			setWeatherLoading(true);
+			try {
+				const response = await api.getWeather(drone.latitude, drone.longitude);
+				if (!response.ok) throw new Error("Weather unavailable");
+				const data = await response.json();
+				if (!cancelled) setWeather(data);
+			} catch {
+				if (!cancelled) setWeather(null);
+			} finally {
+				if (!cancelled) setWeatherLoading(false);
+			}
+		}
+
+		loadWeather();
+		const timer = setInterval(loadWeather, 5 * 60 * 1000);
+
+		return () => {
+			cancelled = true;
+			clearInterval(timer);
+		};
+	}, [selected?.latitude, selected?.longitude]);
+
 	useEffect(() => setSource({ lat: "", lon: "" }), [selectedId]);
 	const selectedTrack = selected ? tracks[selected.id] : null;
 	const selectedMissionId =
@@ -360,14 +395,27 @@ export default function App() {
 				/>
 				<div className="metric weather">
 					<div className="metric-icon amber">
-						<CircleAlert size={17} />
+						<CloudLightning size={17} />
 					</div>
 					<div>
 						<span className="metric-label">WEATHER ALERT</span>
-						<strong>LIGHT RAIN</strong>
-						<small>VISIBILITY 8.2 KM</small>
+						{/* <strong>LIGHT RAIN</strong> */}
+						{/* <small>VISIBILITY 8.2 KM</small> */}
+						<strong>
+							{weatherLoading
+								? "LOADING"
+								: (weather?.condition?.toUpperCase() ?? "UNAVAILABLE")}
+						</strong>
+						<small>
+							{weather
+								? `VISIBILITY ${weather.visibilityKm.toFixed(1)} KM · WIND ${weather.windSpeedKmh} KM/H`
+								: "WEATHER DATA UNAVAILABLE"}
+						</small>
 					</div>
-					<span className="weather-pill">MONITORING</span>
+					{/* <span className="weather-pill">MONITORING</span> */}
+					<span className="weather-pill">
+						{weather?.temperatureC != null ? `${weather.temperatureC}°C` : "—"}
+					</span>
 				</div>
 			</section>
 			<div className="workspace">

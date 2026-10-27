@@ -262,7 +262,7 @@ docker compose ps                         # Shows the status of MongoDB containe
 
 ```powershell
 1. MongoDB addresses:           mongodb://localhost:27017/aerosaga     # Local MongoDB does not require a username or password in this setup.
-2. Temporal addresses:          http://localhost:7233
+2. Temporal Server (gRPC):      http://localhost:7233
 3. Temporal Web UI addresses:   http://localhost:18233
 4. Backend health addresses:    http://localhost:8080/api/health
 5. Fleet API addresses:         http://localhost:8080/api/fleet
