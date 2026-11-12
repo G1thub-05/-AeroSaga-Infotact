@@ -311,6 +311,7 @@ docker compose ps                         # Shows the status of MongoDB containe
 
 ```powershell
 docker compose up -d --force-recreate temporal
+docker compose up -d --force-recreate mongodb
 docker compose ps
 docker compose logs --tail 100 temporal
 ```
