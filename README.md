@@ -126,22 +126,18 @@ AeroSaga supports two execution modes for managing and simulating drone missions
 <code><b><i>Simulation Telemetry and Data Persistence:</i></b></code> AeroSaga simulates drone movement and streams position updates to the dashboard as telemetry. These updates represent simulated flight activity and do not control physical drones. MongoDB stores the latest state of each drone and mission rather than maintaining a separate historical record for every route waypoint.
 </p>
 
-### **⚙️ How the services fit together**
+## **🏛️ System Architecture**
 
-```text
-┌────────────────────────────────────────────────────┐
-│              React + Cesium dashboard              │
-│ Fleet · mission controls · Map · route · telemetry │
-└─────────────────────────┬──────────────────────────┘
-                 REST + WebSocket
-                          ▼
-┌────────────────────────────────────────────────────┐
-│ Spring Boot backend -- API · fleet · mission logic │
-└───────────┬──────────────────────────┬─────────────┘
-            ▼                          ▼
-   ┌──────────────────┐      ┌────────────────────┐
-   │ MongoDB App data │      │ Temporal Workflows │
-   └──────────────────┘      └────────────────────┘
+```mermaid
+flowchart LR
+    A["React + Cesium Dashboard<br/>Fleet · Mission Controls · Map · Routes · Telemetry"]
+    B["Spring Boot Backend<br/>API · Fleet · Mission Logic"]
+    C[("MongoDB<br/>Application Data")]
+    D["Temporal<br/>Workflow Orchestration"]
+
+    A <-->|REST + WebSocket| B
+    B --> C
+    B --> D
 ```
 
 ## **⚙️ Full Setup Guide: Temporal workflow mode**
