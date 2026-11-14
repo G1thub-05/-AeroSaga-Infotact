@@ -16,6 +16,11 @@
 AeroSaga is a full-stack demonstration of a drone fleet control system. Operators can select a simulated drone, plan a delivery, follow its route on a 3D map, and monitor mission progress in real time. The project brings together a <code>`React`</code> dashboard, a <code>`Spring Boot API`</code>, <code>`MongoDB`</code> persistence, </code>, <code>`Temporal`</code> workflows, and </code>, <code>`CesiumJS`</code> maps. It is designed for local development and demonstration. AeroSaga does not connect to or control physical drones. Drone locations, battery readings, and flight activity are simulated. The drones, GPS readings, and flight activities are simulated. The Java SDK is a Maven dependency; Maven downloads it automatically on the first backend run.
 </p>
 
+## **🖥️ Screenshots**
+<p align="center">
+  <img src="./frontend/Assests/Dashboard.png" alt="Dashboard.png" width="100%">
+</p>
+
 ## **🧰 Technologies used**
 
 ```text
@@ -121,22 +126,18 @@ AeroSaga supports two execution modes for managing and simulating drone missions
 <code><b><i>Simulation Telemetry and Data Persistence:</i></b></code> AeroSaga simulates drone movement and streams position updates to the dashboard as telemetry. These updates represent simulated flight activity and do not control physical drones. MongoDB stores the latest state of each drone and mission rather than maintaining a separate historical record for every route waypoint.
 </p>
 
-### **⚙️ How the services fit together**
+## **🏛️ System Architecture**
 
-```text
-┌────────────────────────────────────────────────────┐
-│              React + Cesium dashboard              │
-│ Fleet · mission controls · Map · route · telemetry │
-└─────────────────────────┬──────────────────────────┘
-                 REST + WebSocket
-                          ▼
-┌────────────────────────────────────────────────────┐
-│ Spring Boot backend -- API · fleet · mission logic │
-└───────────┬──────────────────────────┬─────────────┘
-            ▼                          ▼
-   ┌──────────────────┐      ┌────────────────────┐
-   │ MongoDB App data │      │ Temporal Workflows │
-   └──────────────────┘      └────────────────────┘
+```mermaid
+flowchart LR
+    A["React + Cesium Dashboard<br/>Fleet · Mission Controls · Map · Routes · Telemetry"]
+    B["Spring Boot Backend<br/>API · Fleet · Mission Logic"]
+    C[("MongoDB<br/>Application Data")]
+    D["Temporal<br/>Workflow Orchestration"]
+
+    A <-->|REST + WebSocket| B
+    B --> C
+    B --> D
 ```
 
 ## **⚙️ Full Setup Guide: Temporal workflow mode**
