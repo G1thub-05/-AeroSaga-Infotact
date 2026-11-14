@@ -16,6 +16,11 @@
 AeroSaga is a full-stack demonstration of a drone fleet control system. Operators can select a simulated drone, plan a delivery, follow its route on a 3D map, and monitor mission progress in real time. The project brings together a <code>`React`</code> dashboard, a <code>`Spring Boot API`</code>, <code>`MongoDB`</code> persistence, </code>, <code>`Temporal`</code> workflows, and </code>, <code>`CesiumJS`</code> maps. It is designed for local development and demonstration. AeroSaga does not connect to or control physical drones. Drone locations, battery readings, and flight activity are simulated. The drones, GPS readings, and flight activities are simulated. The Java SDK is a Maven dependency; Maven downloads it automatically on the first backend run.
 </p>
 
+## **🖥️ Screenshots**
+<p align="center">
+  <img src="./frontend/Assests/Dashboard.png" alt="Dashboard.png" width="100%">
+</p>
+
 ## **🧰 Technologies used**
 
 ```text
